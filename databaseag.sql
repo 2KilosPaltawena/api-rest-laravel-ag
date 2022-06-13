@@ -64,7 +64,7 @@ CREATE TABLE products(
 
     CONSTRAINT pk_products PRIMARY KEY(id),
     CONSTRAINT fk_product_category_id FOREIGN KEY(category_id) references categories(id),
-    CONSTRAINT fk_product_admin_id FOREIGN KEY(admin_id) references admin(id)
+    CONSTRAINT fk_product_admin_id FOREIGN KEY(admin_id) references admins(id)
 
 )ENGINE=InnoDb;
 

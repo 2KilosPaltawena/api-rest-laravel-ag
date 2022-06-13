@@ -25,7 +25,7 @@ class ProductController extends Controller
     }
 
     public function show($id){
-        $product = Product::find($id);
+        $product = Product::find($id)->load('category');
 
         if(is_object($product)){
             $data = [
