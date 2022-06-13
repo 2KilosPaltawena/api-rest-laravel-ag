@@ -41,6 +41,16 @@ CREATE TABLE sizes(
     CONSTRAINT pk_sizes PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
+CREATE TABLE admins(
+    id int(255) auto_increment NOT NULL,
+    name varchar(255)   NOT NULL,
+    mail varchar(255)   NOT NULL,
+    password    varchar(255) NOT NULL,
+
+    CONSTRAINT pk_admin PRIMARY KEY(id)
+
+)ENGINE=InnoDb;
+
 CREATE TABLE products(
     id  int(255) auto_increment NOT NULL,
     name    varchar(250) NOT NULL,
@@ -79,15 +89,5 @@ CREATE TABLE ccs(
     CONSTRAINT fk_cc_product_id FOREIGN KEY (product_id) references products(id),
     CONSTRAINT fk_cc_typeFeature_id FOREIGN KEY(typeFeature_id) references typeFeatures(id),
     CONSTRAINT fk_cc_feature_id FOREIGN KEY(feature_id) references features(id)
-
-)ENGINE=InnoDb;
-
-CREATE TABLE admins(
-    id int(255) auto_increment NOT NULL,
-    name varchar(255)   NOT NULL,
-    mail varchar(255)   NOT NULL,
-    password    varchar(255) NOT NULL,
-
-    CONSTRAINT pk_admin PRIMARY KEY(id)
 
 )ENGINE=InnoDb;
