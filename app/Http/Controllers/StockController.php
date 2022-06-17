@@ -3,10 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Stock;
 
 class StockController extends Controller
 {
-    public function pruebas(Request $request){
-        return "Accion de pruebas de STOCK-CONTROLLER";
+
+    public function index(){
+        $stock = Stock::all()->load('product','size');
+
+        return response()->json([
+            'code'=> 200,
+            'status'=>'succes',
+            'stock'=>$stock
+        ]);
+    } 
+    
+    public function show($id){
+        $stock = Stock::find($id)->load('product','size');
+
+        return response()->json([
+            'code'=> 200,
+            'status'=>'succes',
+            'stock'=>$stock
+        ]);
+    }
+
+    public function getProductByStock($id){
+        $stock = Stock::where('product_id',$id)->get()->load('product','size');
+        return response()->json(['stock'=>$stock]);
+
     }
 }

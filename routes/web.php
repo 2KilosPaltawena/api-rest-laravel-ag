@@ -47,8 +47,18 @@ Route::resource('/api/category','CategoryController');
 
 Route::resource('/api/product','ProductController');
 Route::get('/api/product/category/{id}','ProductController@getProductByCategory');
-//Route::post('/api/product/productadd','');
+Route::get('/api/product/ranking/{rank}','ProductController@getProductByRanking');
+Route::post('/api/productadd','ProductController@productadd');
 
 //rutas de controlador de acciones
 Route::resource('/api/pruebas','ControllerPruebas');
+
+//rutas de controlador de stock
+Route::resource('/api/stock','StockController');
+Route::get('/api/stock/product/{id}','StockController@getProductByStock');
+
+//rutas controlador cc
+Route::get('/api/cc/product/{id}','CcController@getProductByCc');
+Route::get('/api/cc/product/{id}/{ide}','CcController@getProductByCcQyA');
+
 

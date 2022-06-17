@@ -59,7 +59,7 @@ CREATE TABLE products(
     category_id  int(255),
     admin_id int(255),
     created_at  datetime DEFAULT NULL,
-    update_at   datetime DEFAULT NULL,
+    updated_at   datetime DEFAULT NULL,
     remember_token  varchar(255),
 
     CONSTRAINT pk_products PRIMARY KEY(id),
