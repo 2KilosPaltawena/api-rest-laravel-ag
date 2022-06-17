@@ -56,6 +56,7 @@ CREATE TABLE products(
     name    varchar(250) NOT NULL,
     price   varchar(250) NOT NULL,
     image varchar(255),
+    ranking varchar(255),
     category_id  int(255),
     admin_id int(255),
     created_at  datetime DEFAULT NULL,
