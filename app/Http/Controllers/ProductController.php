@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -50,13 +51,26 @@ class ProductController extends Controller
 
     }
 
+    public function getProductByWord($word){
+        if($word === "guantes"){
+            $product = Product::where('category_id',"1")->get();
+        }
+        elseif($word === "zapatos"){
+            $product = Product::where('category_id',"2")->get();
+
+        }else{
+         $product = Product::where('name',$word)->get()->load('category');   
+        }
+
+        return response()->json(['product'=>$product]);
+    }
+//-----------------------------POST------------------------------------------------------------------------------------
     public function productadd(Request $request){
         
 //recoger los datos del producto por post
         $json = $request->input('json', null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
-
 //validar datos ( no tan importante)
         $validate = \Validator::make($params_array, [
             'name' =>'required|alpha',
@@ -67,23 +81,22 @@ class ProductController extends Controller
         ]);
 
         if(!empty($params) && !empty($params_array)){
+            $params_array = array_map('trim' , $params_array);
 
-        $params_array = array_map('trim' , $params_array);
-
-        if($validate->fails()){
-            $data = array(
-                'status' => 'error',
-                'code' => 404,
-                'message'=>'El producto no ha sido validado correctamente',
-                'errors' => $validate->errors()
-            );
-        }else{
-            $data = array(
-                'status' => 'succes',
-                'code' => 200,
-                'message'=>'El producto ha sido validado correctamente'
-            );
-        }
+            if($validate->fails()){
+                $data = array(
+                    'status' => 'error',
+                    'code' => 404,
+                    'message'=>'El producto no ha sido validado correctamente',
+                    'errors' => $validate->errors()
+                );
+            }else{
+                $data = array(
+                    'status' => 'succes',
+                    'code' => 200,
+                    'message'=>'El producto ha sido validado correctamente'
+                );
+            }
 
 //comprobar si producto está duplicado
 
@@ -99,14 +112,14 @@ class ProductController extends Controller
 
         $product->save();
 
-    }else{
-        $data = array(
-            'status' => 'error',
-            'code' => 404,
-            'message' => 'Los datos enviados no son correctos'
-        );
+        }else{
+            $data = array(
+                'status' => 'error',
+                'code' => 404,
+                'message' => 'Los datos enviados no son correctos'
+            );
 
-    }
+        }
 
 
         return response ()->json($data, $data['code']);

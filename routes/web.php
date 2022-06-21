@@ -48,6 +48,7 @@ Route::resource('/api/category','CategoryController');
 Route::resource('/api/product','ProductController');
 Route::get('/api/product/category/{id}','ProductController@getProductByCategory');
 Route::get('/api/product/ranking/{rank}','ProductController@getProductByRanking');
+Route::get('/api/product/word/{word}','ProductController@getProductByWord');
 Route::post('/api/productadd','ProductController@productadd');
 
 //rutas de controlador de acciones
