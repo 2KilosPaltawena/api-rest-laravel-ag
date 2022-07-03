@@ -22,13 +22,13 @@ class CcController extends Controller
 
 
     public function getProductByCcQyAx2($idq1,$ida1,$idq2,$ida2){
-        $cc = Cc::orwhere('typeFeature_id',$idq1)
+        $cc = Cc::select('product_id')->distinct()->orwhere('typeFeature_id',$idq1)
         ->where('feature_id',$ida1)
         ->orwhere('typeFeature_id',$idq2)
         ->where('feature_id',$ida2)
         ->get()->load('product','feature','typefeature');
 
-       $cc = $cc->unique("product_id");
+       //$cc = $cc->unique("product_id");
         $largo = count($cc);
         //return $largo;
         $pp = $cc;

@@ -27,8 +27,8 @@ class UserController extends Controller
 
             //VALIDAR DATOS
             $validate = \Validator::make($params_array, [
-                'usuario' => 'required|alpha',
                 'name' => 'required|alpha',
+                'surname' => 'required|alpha',
                 'email' => 'required|email|unique:users',//COMPROBAR SI EL USUARIO ESTÁ DUPLUCADO
                 'password' => 'required',
             ]);
@@ -46,12 +46,12 @@ class UserController extends Controller
                 //validacion pasada correctamente
 
                 //CIFRAR CONTRASEÑA
-                $pwd = hash('sha256', $params->password);
+                //$pwd = hash('sha256', $params->password);
                 
                 //CREAR EL USUARIO
                 $user = new User();
-                $user->user = $params_array['user'];
                 $user->name = $params_array['name'];
+                $user->surname = $params_array['surname'];
                 $user->email = $params_array['email'];
                 //$user->password = $pwd;
                 $user->password = $params_array['password'];
