@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +34,11 @@ Route::get('/feature/pruebas','FeatureController@pruebas');
 
 //rutas del controlador de user
 
-Route::post('api/register','UserController@register');
+//Route::post('api/register','UserController@register');
+Route::post('api/register',[UserController::class,'register']);
+
+Route::post('api/login',[UserController::class,'login']);
+
 Route::post('api/login','UserController@login');
 Route::post('api/user/update', 'UserController@update');
 

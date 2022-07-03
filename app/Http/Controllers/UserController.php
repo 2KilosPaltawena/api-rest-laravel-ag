@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Firebase\JWT\JWT;
 use App\Helpers\JwtAuth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
         return "acción de pruebas de USER-CONTROLLER";
     }
     //----------------------------------------------------------------------------------------------
-    public function register(Request $request){
+    public function register22(Request $request){
         //RECOGER DATOS DE USUARIO
 
         $json = $request->input('json', null);
@@ -76,8 +77,34 @@ class UserController extends Controller
         }
         return response()->json($data, $data['code']);
     }
+
+    public function register(Request $request){
+    
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->email = $request->input('email');
+        //$user->password = $pwd;
+        $user->password =Hash::make($request->input('password')) ;
+        $user->save();
+
+        //return response()->json();
+        return $user;
+    }
+
+    public function login(Request $req){
+
+        $user=User::where('email',$req->email)->first();
+        if(!$user || !Hash::check($req->password,$user->password)){
+            return["clave incorrecta o no encontrada"];
+        }
+        return $user;
+
+    }
+
+
 //---------------------------------------------------------------------------------------------------------
-    public function login(Request $request){
+    public function login22(Request $request){
 
         $jwtAuth = new \JwtAuth();
 
