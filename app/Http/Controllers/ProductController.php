@@ -46,7 +46,12 @@ class ProductController extends Controller
     }
 
     public function getProductByRanking($rank){
-        $product = Product::where('ranking',$rank)->get();
+        $product = Product::where('ranking',$rank)->where('category_id','1')->get();
+        return response()->json(['product'=>$product]);
+    }
+
+    public function getProductZapatosByRanking($rank){
+        $product = Product::where('ranking',$rank)->where('category_id','2')->get();
         return response()->json(['product'=>$product]);
 
     }
@@ -64,6 +69,15 @@ class ProductController extends Controller
 
         return response()->json(['product'=>$product]);
     }
+
+    public function getProductByNew($id){
+        $products = Product::where('nuevo',$id)->get();
+        return response()->json(['products'=>$products]);
+    }
+
+    public function getProductByX($category,$id){
+
+    }
 //-----------------------------POST------------------------------------------------------------------------------------
     public function productadd(Request $request){
         
@@ -76,6 +90,7 @@ class ProductController extends Controller
             'name' =>'required|alpha',
             'price'=>'required',
             'ranking'=>'required',
+            'nuevo'=>'required',
             'category_id'=>'required',
             'image'=>'required'
         ]);

@@ -47,8 +47,13 @@ Route::resource('/api/category','CategoryController');
 
 Route::resource('/api/product','ProductController');
 Route::get('/api/product/category/{id}','ProductController@getProductByCategory');
-Route::get('/api/product/ranking/{rank}','ProductController@getProductByRanking');
+Route::get('/api/product/ranking/guantes/{rank}','ProductController@getProductByRanking');
+
+Route::get('/api/product/ranking/zapatos/{rank}','ProductController@getProductZapatosByRanking');
 Route::get('/api/product/word/{word}','ProductController@getProductByWord');
+Route::get('/api/product/new/{id}','ProductController@getProductByNew');
+Route::get('/api/product/{category}/{id}','ProductController@getProductByX');
+
 Route::post('/api/productadd','ProductController@productadd');
 
 //rutas de controlador de acciones
@@ -61,5 +66,6 @@ Route::get('/api/stock/product/{id}','StockController@getProductByStock');
 //rutas controlador cc
 Route::get('/api/cc/product/{id}','CcController@getProductByCc');
 Route::get('/api/cc/product/{id}/{ide}','CcController@getProductByCcQyA');
+Route::get('/api/cc/productqa2/{idq1}/{ida1}/{idq2}/{ida2}','CcController@getProductByCcQyAx2');
 
 
