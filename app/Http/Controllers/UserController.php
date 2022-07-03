@@ -96,7 +96,7 @@ class UserController extends Controller
 
         $user=User::where('email',$req->email)->first();
         if(!$user || !Hash::check($req->password,$user->password)){
-            return["clave incorrecta o no encontrada"];
+            return 1;
         }
         return $user;
 
