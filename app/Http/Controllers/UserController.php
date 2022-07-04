@@ -79,22 +79,29 @@ class UserController extends Controller
     }
 
     public function register(Request $request){
-    
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->surname = $request->input('surname');
-        $user->email = $request->input('email');
-        //$user->password = $pwd;
-        $user->password =Hash::make($request->input('password')) ;
-        $user->save();
 
-        //return response()->json();
-        return $user;
-    }
+            //CREAR EL USUARIO
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->surname = $request->input('surname');
+            $user->email = $request->input('email');
+            //$user->password = $pwd;
+            $user->password =Hash::make($request->input('password')) ;
+            
+            $pp=User::where('email', $request->input('email'))->exists();
+
+            if ($pp == false){
+                $user->save();
+               return $user;  
+            }else{
+                return 1;
+            }     
+
+}
 
     public function login(Request $req){
 
-        $user=User::where('email',$req->email)->first();
+        $user=User::select('email')->distinct()->where('email',$req->email);
         if(!$user || !Hash::check($req->password,$user->password)){
             return 1;
         }
