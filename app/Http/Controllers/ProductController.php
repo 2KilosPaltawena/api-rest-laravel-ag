@@ -78,8 +78,22 @@ class ProductController extends Controller
     public function getProductByX($category,$id){
 
     }
+
+    function search($key){
+        $product = Product::where('name','Like',"$key%")->get();
+
+        return $product;
+    }
+
+
 //-----------------------------POST------------------------------------------------------------------------------------
-    public function productadd(Request $request){
+public function addProduct(){
+    
+}
+
+
+
+public function productadd11(Request $request){
         
 //recoger los datos del producto por post
         $json = $request->input('json', null);

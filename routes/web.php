@@ -56,6 +56,8 @@ Route::resource('/api/product','ProductController');
 Route::get('/api/product/category/{id}','ProductController@getProductByCategory');
 Route::get('/api/product/ranking/guantes/{rank}','ProductController@getProductByRanking');
 
+Route::get('/api/search/{key}','ProductController@search');
+
 Route::get('/api/product/ranking/zapatos/{rank}','ProductController@getProductZapatosByRanking');
 Route::get('/api/product/word/{word}','ProductController@getProductByWord');
 Route::get('/api/product/new/{id}','ProductController@getProductByNew');
@@ -69,6 +71,9 @@ Route::resource('/api/pruebas','ControllerPruebas');
 //rutas de controlador de stock
 Route::resource('/api/stock','StockController');
 Route::get('/api/stock/product/{id}','StockController@getProductByStock');
+
+Route::post('api/bystock',[UserController::class,'bystock']);
+Route::get('api/bystock',[UserController::class,'bystock']);
 
 //rutas controlador cc
 Route::get('/api/cc/product/{id}','CcController@getProductByCc');

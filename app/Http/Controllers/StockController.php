@@ -34,4 +34,14 @@ class StockController extends Controller
         return response()->json(['stock'=>$stock]);
 
     }
+
+    public function bystock(Request $request){
+
+        //CREAR EL USUARIO
+
+        $stock=Stock::where('product_id',$request->product_id)->where('size_id',$request->size_id)->get();
+
+        return $stock;
+
+}
 }

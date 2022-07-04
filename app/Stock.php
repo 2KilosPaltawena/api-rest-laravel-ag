@@ -15,4 +15,10 @@ class Stock extends Model
     public function size(){
         return $this->belongsTo('App\Size','size_id');
     }
+
+    protected $fillable = [
+        'product_id',
+        'id_talla',
+        'cantidad',
+    ];
 }
