@@ -87,7 +87,7 @@ class UserController extends Controller
             $user->email = $request->input('email');
             //$user->password = $pwd;
             $user->password =Hash::make($request->input('password')) ;
-            
+
             $pp=User::where('email', $request->input('email'))->exists();
 
             if ($pp == false){
@@ -101,7 +101,7 @@ class UserController extends Controller
 
     public function login(Request $req){
 
-        $user=User::select('email')->distinct()->where('email',$req->email);
+        $user=User::where('email',$req->email)->first();
         if(!$user || !Hash::check($req->password,$user->password)){
             return 1;
         }
